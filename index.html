@@ -395,7 +395,7 @@ select option{color:#17130e}
       .then(function(r){
         if(!r.success)throw new Error();
         btn.textContent='Sent ✓';f.reset();
-        setTimeout(function(){btn.disabled=false;btn.textContent=old;dlg.close()},1800);
+        setTimeout(function(){location.href='/confirmed/'},600);
       })
       .catch(function(){
         btn.disabled=false;btn.textContent=old;
