@@ -22,28 +22,31 @@
   --spot:rgba(255,226,160,.22);--pool:rgba(217,178,95,.2);--dirt1:#3b332a;--dirt2:#120f0b;--dust:#e8cf94;--vig:.6;
 }
 *{box-sizing:border-box}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;display:flex;flex-direction:column;background:var(--bar);color:var(--ink);font-family:Jost,"Helvetica Neue",system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{height:100%;overflow:hidden;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:hidden;display:flex;flex-direction:column;background:var(--bar);color:var(--ink);font-family:Jost,"Helvetica Neue",system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .bar{background:var(--bar);color:var(--bar-ink);padding:15px clamp(22px,5vw,64px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;font-weight:400;letter-spacing:.14em}
 .bar a{color:inherit;text-decoration:none}
 .brand{display:inline-flex;align-items:center;gap:10px}
 .brand svg{width:26px;height:20px;flex:none}
 .bar a:hover,.bar a:focus-visible{color:#d9b25f;outline:none}
-main{flex:1;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;isolation:isolate;
+main{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;isolation:isolate;
   background:radial-gradient(70% 55% at 40% 100%,var(--pool),transparent 70%),linear-gradient(180deg,var(--bg),var(--bg2))}
 .spot{position:absolute;z-index:0;left:-20%;right:-20%;top:-10%;bottom:12%;pointer-events:none;filter:blur(26px);
   background:conic-gradient(from 168deg at 42% 0%,transparent 0deg,var(--spot) 12deg,transparent 24deg);
   -webkit-mask-image:linear-gradient(#000 30%,transparent 100%);mask-image:linear-gradient(#000 30%,transparent 100%);animation:lights 2.6s .3s ease-out both}
 .motes{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .motes i{position:absolute;bottom:-10px;border-radius:50%;background:radial-gradient(circle,var(--dust),transparent 70%);opacity:0;animation:rise linear infinite}
+.frame{position:absolute;inset:clamp(12px,2.2vw,26px);z-index:3;pointer-events:none}
+.frame b{position:absolute;width:20px;height:20px;border:0 solid var(--gold);opacity:.65}
+.frame b:nth-child(1){top:0;left:0;border-width:1px 0 0 1px}.frame b:nth-child(2){top:0;right:0;border-width:1px 1px 0 0}.frame b:nth-child(3){bottom:0;left:0;border-width:0 0 1px 1px}.frame b:nth-child(4){bottom:0;right:0;border-width:0 1px 1px 0}
 .vig{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(110% 85% at 50% 50%,transparent 50%,rgba(0,0,0,var(--vig)) 100%)}
 .grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.copy{position:relative;z-index:2;padding:clamp(40px,9vh,104px) clamp(22px,5vw,64px) 0;max-width:900px;animation:reveal 1.8s .2s cubic-bezier(.2,.7,.2,1) both}
+.copy{position:relative;z-index:2;padding:clamp(20px,5vh,64px) clamp(22px,5vw,64px) 0;max-width:900px;animation:reveal 1.8s .2s cubic-bezier(.2,.7,.2,1) both}
 .hair{display:block;width:72px;height:1px;background:var(--gold);margin:0 0 26px;transform-origin:left;animation:draw 1.6s .4s cubic-bezier(.6,0,.2,1) both}
 .status{margin:0 0 22px;color:var(--gold);font-weight:400;font-size:15px;letter-spacing:.22em}
-h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(46px,8.4vw,112px);line-height:1;letter-spacing:-.015em;margin:0 0 26px;max-width:11.5em}
+h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(34px,min(6.4vw,10.5vh),104px);line-height:1;letter-spacing:-.015em;margin:0 0 clamp(14px,3vh,26px);max-width:11.5em}
 .copy p{margin:0;max-width:40ch;color:var(--muted);font-size:clamp(17px,1.8vw,20px)}
-.actions{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:34px}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:22px;margin-top:clamp(18px,4vh,34px)}
 .social{display:flex;gap:12px}
 .social a{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--hair);border-radius:50%;color:var(--ink);transition:background .35s,color .35s,border-color .35s}
 .social a:hover,.social a:focus-visible{background:var(--gold);border-color:var(--gold);color:#0a0806;outline:none}
@@ -75,6 +78,15 @@ h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:
 @keyframes lights{from{opacity:0}to{opacity:1}}
 @keyframes reveal{from{opacity:0;filter:blur(14px);transform:translateY(14px)}to{opacity:1;filter:none;transform:none}}
 @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (min-width:760px) and (min-aspect-ratio:1/1){
+main{flex-direction:row;align-items:center;justify-content:space-between}
+.copy{flex:0 1 46%;padding-top:0;padding-bottom:0}
+.scene{align-self:center;flex:0 0 54%;width:54%;margin:0;padding:0 clamp(8px,2vw,32px) 0 0}
+.scene svg{max-height:70vh}
+}
+@media (max-height:560px){
+.copy p{display:none}.hair{margin-bottom:12px}.status{margin-bottom:8px}h1{font-size:clamp(26px,8.5vh,48px)}.cta,.social a{height:40px}.social a{width:40px}.cta{padding:0 22px;line-height:40px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.motes{display:none}}
 </style>
 </head>
@@ -115,6 +127,8 @@ h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:
           <path d="M548 275 Q598 172 650 186 Q698 198 722 275 Z" fill="url(#gD)"/>
           <path d="M572 275 Q612 212 650 220 Q690 226 708 275 Z" fill="#000" opacity=".2"/>
           <g fill="#ffe9a8"><circle class="gl" cx="612" cy="226" r="2.2"/><circle class="gl" cx="654" cy="236" r="2.6"/><circle class="gl" cx="586" cy="256" r="2"/><circle class="gl" cx="672" cy="250" r="2.4"/></g>
+          <g transform="translate(14 0)"><path d="M10 274 L18 242 L24 242 L32 274 Z" fill="url(#gY)" stroke="#6f4d14" stroke-width="1"/><path d="M14.5 258 L27.5 258 L29 264 L13 264 Z" fill="#14110e"/><rect x="6" y="272" width="30" height="3" rx="1" fill="#14110e"/></g>
+          <g transform="translate(52 0)"><path d="M10 274 L18 242 L24 242 L32 274 Z" fill="url(#gY)" stroke="#6f4d14" stroke-width="1"/><path d="M14.5 258 L27.5 258 L29 264 L13 264 Z" fill="#14110e"/><rect x="6" y="272" width="30" height="3" rx="1" fill="#14110e"/></g>
           <g class="machine">
             <rect x="108" y="234" width="236" height="40" rx="20" fill="url(#gS)"/>
             <path d="M130 237H322M130 271H322" stroke="#050403" stroke-width="3" stroke-dasharray="6 5"/>
@@ -150,9 +164,13 @@ h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:
                 <path d="M458 135 L480 170" stroke="url(#gC)" stroke-width="5" stroke-linecap="round"/>
                 <circle cx="420" cy="120" r="12" fill="url(#gS)" stroke="#050403" stroke-width="1.5"/><circle cx="420" cy="120" r="4.5" fill="url(#gC)"/>
                 <g class="bucket">
-                  <path d="M494 226 L476 252 Q478 272 506 272 Q532 268 540 246 L526 234 Z" fill="url(#gS)" stroke="#050403" stroke-width="2.5" stroke-linejoin="round"/>
-                  <path d="M496 232 L482 252 Q486 266 506 267" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
-                  <path d="M476 252 L472 262M486 266 L484 276M498 271 L497 279M510 272 L511 280" stroke="url(#gC)" stroke-width="3.5" stroke-linecap="round"/>
+                  <path d="M498 224 C534 224 555 250 528 268 Q505 275 484 268 L476 260 L481 242 Q485 232 496 229 Z" fill="url(#gS)" stroke="#050403" stroke-width="2.5" stroke-linejoin="round"/>
+                  <path d="M481 244 Q486 235 497 231 L495 242 Z" fill="var(--dirt1)"/>
+                  <path d="M504 230 C528 231 543 250 523 263" fill="none" stroke="#050403" stroke-opacity=".4" stroke-width="2"/>
+                  <path d="M484 268 Q505 275 528 268" fill="none" stroke="#d9b25f" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M500 227 C528 227 549 246 531 262" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.6"/>
+                  <g fill="#d9b25f"><circle cx="514" cy="238" r="1.5"/><circle cx="528" cy="250" r="1.5"/><circle cx="510" cy="266" r="1.5"/><circle cx="492" cy="263" r="1.5"/></g>
+                  <g fill="url(#gC)" stroke="#050403" stroke-width="1" stroke-linejoin="round"><path d="M474 256 L466 262 L476 264 Z"/><path d="M480 264 L472 271 L483 270 Z"/><path d="M490 269 L484 277 L494 273 Z"/><path d="M500 272 L497 280 L507 274 Z"/></g>
                   <circle cx="500" cy="235" r="9" fill="url(#gS)" stroke="#050403" stroke-width="1.5"/><circle cx="500" cy="235" r="3.5" fill="url(#gC)"/>
                 </g>
               </g>
@@ -169,6 +187,7 @@ h1{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:
       <rect x="-20" y="274" width="780" height="1.2" fill="url(#gH)"/>
     </svg>
   </div>
+  <div class="frame" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
   <div class="vig"></div>
   <div class="grain"></div>
 </main>
