@@ -356,15 +356,19 @@ select option{color:#17130e}
   <p class="eyebrow">For brands</p><h2>Work with me</h2>
   <p class="lede" style="font-size:17px">Tell me about your brand and what you have in mind, whether that’s content or an athlete / ambassador partnership. I handle every enquiry myself and will follow up personally.</p>
   <form id="f">
-    <label>Your name *<input name="n" required autocomplete="name"></label>
-    <label>Your email *<input name="e" type="email" required autocomplete="email"></label>
-    <label>Your brand *<input name="b" required></label>
-    <label>What you need *<select name="t" required><option>UGC</option><option>Videography</option><option>Athlete / Ambassador partnership</option><option>Both / not sure yet</option></select></label>
-    <label>Tell me more *<textarea name="m" rows="3" required></textarea></label>
+    <input type="hidden" name="access_key" value="97604333-7048-432f-9998-c4861e97d1c9">
+    <input type="hidden" name="subject" id="subj" value="New enquiry from itsmadebymo.com">
+    <input type="hidden" name="from_name" value="itsmadebymo website">
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
+    <label>Your name *<input name="name" required autocomplete="name"></label>
+    <label>Your email *<input name="email" type="email" required autocomplete="email"></label>
+    <label>Your brand *<input name="brand" required></label>
+    <label>What you need *<select name="looking_for" required><option>UGC</option><option>Videography</option><option>Athlete / Ambassador partnership</option><option>Both / not sure yet</option></select></label>
+    <label>Tell me more *<textarea name="message" rows="3" required></textarea></label>
     <div class="row"><button class="btn" type="submit">Send enquiry</button><button class="btn" type="button" id="cc" style="border-color:var(--hair)">Cancel</button></div>
   </form>
-  <div class="fb" id="fb"><b>Didn’t your email app open?</b> Copy the message and send it to contact@itsmadebymo.com.<br><button id="cm">Copy message</button></div>
-  <p style="font-size:14px;color:var(--muted);margin:20px 0 0">This opens your own email app with the details filled in, addressed to me. You send it from your account, so my reply lands straight in your inbox.</p>
+  <div class="fb" id="fb"></div>
+  <p style="font-size:14px;color:var(--muted);margin:20px 0 0">Your enquiry goes straight to my inbox and I’ll reply to you by email.</p>
 </dialog>
 
 <script>
@@ -380,12 +384,27 @@ select option{color:#17130e}
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
   d.querySelectorAll('[data-code]').forEach(function(b){b.addEventListener('click',function(){copy(b.getAttribute('data-code'),b)})});
   f.addEventListener('submit',function(e){
-    e.preventDefault();var v=new FormData(f);
-    msg='Hi Mo,\n\nName: '+v.get('n')+'\nEmail: '+v.get('e')+'\nBrand: '+v.get('b')+'\nI’m looking for: '+v.get('t')+'\n\n'+v.get('m');
-    fb.classList.add('on');
-    location.href='mailto:'+TO+'?subject='+encodeURIComponent('Enquiry from '+v.get('b'))+'&body='+encodeURIComponent(msg);
+    e.preventDefault();
+    var v=new FormData(f),btn=f.querySelector('[type=submit]'),old=btn.textContent,o={};
+    v.forEach(function(val,k){o[k]=val});
+    d.getElementById('subj').value=o.subject='Enquiry from '+o.brand+' ('+o.looking_for+')';
+    msg='Hi Mo,\n\nName: '+o.name+'\nEmail: '+o.email+'\nBrand: '+o.brand+'\nI’m looking for: '+o.looking_for+'\n\n'+o.message;
+    fb.classList.remove('on');btn.disabled=true;btn.textContent='Sending…';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(o)})
+      .then(function(r){return r.json()})
+      .then(function(r){
+        if(!r.success)throw new Error();
+        btn.textContent='Sent ✓';f.reset();
+        setTimeout(function(){btn.disabled=false;btn.textContent=old;dlg.close()},1800);
+      })
+      .catch(function(){
+        btn.disabled=false;btn.textContent=old;
+        fb.innerHTML='<b>Couldn’t send automatically.</b> Please email me directly at '+TO+'.<br><button type="button" id="cm">Copy message</button>';
+        fb.classList.add('on');
+        d.getElementById('cm').onclick=function(){copy(msg,this)};
+        location.href='mailto:'+TO+'?subject='+encodeURIComponent(o.subject)+'&body='+encodeURIComponent(msg);
+      });
   });
-  d.getElementById('cm').onclick=function(){copy(msg,this)};
   (function(){var t=d.getElementById('mt'),unit=t.firstElementChild.cloneNode(true),rt;
     function build(){
       t.innerHTML='';t.style.animation='none';
