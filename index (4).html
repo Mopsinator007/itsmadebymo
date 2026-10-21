@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Enquiry sent · itsmadebymo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efe8da;--ink:#17130e;--muted:#5f5646;--gold:#9c7424;--hair:rgba(156,116,36,.45);
+  --spot:rgba(255,251,238,.8);--pool:rgba(156,116,36,.22);--dust:#b99a5c;--nav:rgba(239,232,218,.82);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#080706;--ink:#f4ecdc;--muted:#b2a58f;--gold:#d9b25f;--hair:rgba(217,178,95,.34);
+  --spot:rgba(255,226,160,.24);--pool:rgba(217,178,95,.2);--dust:#e8cf94;--nav:rgba(8,7,6,.78);
+}}
+:root[data-theme="dark"]{
+  --bg:#080706;--ink:#f4ecdc;--muted:#b2a58f;--gold:#d9b25f;--hair:rgba(217,178,95,.34);
+  --spot:rgba(255,226,160,.24);--pool:rgba(217,178,95,.2);--dust:#e8cf94;--nav:rgba(8,7,6,.78);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:Jost,"Helvetica Neue",system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{width:min(1200px,100% - clamp(40px,8vw,128px));margin:0 auto}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--hair)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:12px;font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;text-decoration:none}
+.dm{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.back{font-size:13px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:color .3s}
+.back:hover{color:var(--gold)}
+.grain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+main{position:relative;flex:1;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:clamp(56px,9vw,120px) 0;background:radial-gradient(70% 60% at 50% 100%,var(--pool),transparent 70%)}
+.spot{position:absolute;z-index:-1;left:20%;right:20%;top:-25%;bottom:0;pointer-events:none;filter:blur(28px);background:conic-gradient(from 168deg at 50% 0%,transparent 0deg,var(--spot) 11deg,transparent 22deg);animation:fade 2.4s .2s ease-out both}
+.motes{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.motes i{position:absolute;bottom:-10px;border-radius:50%;background:radial-gradient(circle,var(--dust),transparent 70%);opacity:0;animation:rise linear infinite}
+.box{text-align:center;max-width:640px;padding:0 4px}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 22px;color:var(--gold);font-weight:400;font-size:13px;letter-spacing:.26em;text-transform:uppercase}
+.eyebrow::before,.eyebrow::after{content:"";width:34px;height:1px;background:var(--gold)}
+.tick{width:84px;height:84px;margin:0 auto 30px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 70px -10px var(--pool)}
+.tick svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .9s .5s ease-out forwards}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;margin:0 0 20px;letter-spacing:-.014em;line-height:1;font-size:clamp(52px,8.5vw,112px)}
+.lede{color:var(--muted);font-size:clamp(17px,1.7vw,20px);margin:0 auto 38px;max-width:44ch}
+.box>*{animation:reveal 1.4s cubic-bezier(.2,.7,.2,1) both}
+.box>:nth-child(2){animation-delay:.15s}.box>:nth-child(3){animation-delay:.25s}.box>:nth-child(4){animation-delay:.35s}.box>:nth-child(5){animation-delay:.45s}
+.btn{display:inline-block;padding:16px 34px;border:1px solid var(--gold);background:transparent;color:var(--ink);font:400 14px Jost,sans-serif;letter-spacing:.2em;text-decoration:none;text-transform:uppercase;transition:background .4s,color .4s,letter-spacing .4s}
+.btn:hover,.btn:focus-visible{background:var(--gold);color:#0a0806;letter-spacing:.24em;outline:none}
+.social{display:flex;justify-content:center;gap:12px;margin-top:34px}
+.social a{width:50px;height:50px;display:grid;place-items:center;border:1px solid var(--hair);border-radius:50%;transition:background .35s,color .35s,border-color .35s}
+.social a:hover,.social a:focus-visible{background:var(--gold);border-color:var(--gold);color:#0a0806;outline:none}
+.social svg{width:20px;height:20px}
+footer{border-top:1px solid var(--hair);padding:26px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:none}footer a:hover{color:var(--gold)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes reveal{from{opacity:0;filter:blur(12px);transform:translateY(16px)}to{opacity:1;filter:none;transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{0%{opacity:0;transform:translate(0,0)}15%{opacity:.8}100%{opacity:0;transform:translate(var(--dx),-70vh)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.tick svg{stroke-dashoffset:0}.motes{display:none}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav><div class="wrap"><a class="logo" href="/"><i class="dm"></i>itsmadebymo</a><a class="back" href="/">Back to site</a></div></nav>
+
+<main>
+  <div class="spot"></div><div class="motes" id="motes" aria-hidden="true"></div>
+  <div class="box">
+    <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <p class="eyebrow">Enquiry sent</p>
+    <h1>Thank you.</h1>
+    <p class="lede">Your message is on its way to me. I handle every enquiry myself and will get back to you personally by email.</p>
+    <a class="btn" href="/">Back to site</a>
+    <div class="social">
+      <a href="https://www.instagram.com/itsmadebymo" target="_blank" rel="noopener" aria-label="Instagram @itsmadebymo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.tiktok.com/@itsmadebymo" target="_blank" rel="noopener" aria-label="TikTok @itsmadebymo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.6V9.2a7.4 7.4 0 0 0 4.3 1.4V7.5a4.3 4.3 0 0 1-3.2-1.7z"/></svg></a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap"><span>© itsmadebymo</span><a href="mailto:contact@itsmadebymo.com">contact@itsmadebymo.com</a></div></footer>
+
+<script>
+(function(){var m=document.getElementById('motes');
+  for(var i=0;i<18;i++){var e=document.createElement('i'),s=1.5+Math.random()*3.5;
+    e.style.cssText='left:'+(Math.random()*100)+'%;width:'+s+'px;height:'+s+'px;--dx:'+((Math.random()-.5)*120)+'px;animation-duration:'+(10+Math.random()*12)+'s;animation-delay:'+(-Math.random()*20)+'s';
+    m.appendChild(e)}
+})();
+</script>
+</body>
+</html>
