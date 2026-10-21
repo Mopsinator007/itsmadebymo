@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>itsmadebymo · Videographer &amp; UGC Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efe8da;--bg2:#d6cbb4;--ink:#17130e;--muted:#5f5646;--gold:#9c7424;--hair:rgba(156,116,36,.45);
+  --spot:rgba(255,251,238,.8);--pool:rgba(156,116,36,.22);--dust:#b99a5c;--t1:#e6dcc6;--t2:#cdbf9f;--nav:rgba(239,232,218,.82);--glowc:rgba(156,116,36,.13);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#080706;--bg2:#17120c;--ink:#f4ecdc;--muted:#b2a58f;--gold:#d9b25f;--hair:rgba(217,178,95,.34);
+  --spot:rgba(255,226,160,.24);--pool:rgba(217,178,95,.2);--dust:#e8cf94;--t1:#1d1812;--t2:#0d0a07;--nav:rgba(8,7,6,.78);--glowc:rgba(217,178,95,.11);
+}}
+:root[data-theme="dark"]{
+  --bg:#080706;--bg2:#17120c;--ink:#f4ecdc;--muted:#b2a58f;--gold:#d9b25f;--hair:rgba(217,178,95,.34);
+  --spot:rgba(255,226,160,.24);--pool:rgba(217,178,95,.2);--dust:#e8cf94;--t1:#1d1812;--t2:#0d0a07;--nav:rgba(8,7,6,.78);--glowc:rgba(217,178,95,.11);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Jost,"Helvetica Neue",system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{width:min(1200px,100% - clamp(40px,8vw,128px));margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:14px;margin:0 0 20px;color:var(--gold);font-weight:400;font-size:13px;letter-spacing:.26em;text-transform:uppercase}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-weight:400;margin:0;letter-spacing:-.014em;line-height:1}
+h2{font-size:clamp(40px,5.8vw,78px);margin-bottom:18px}
+.lede{max-width:46ch;color:var(--muted);font-size:clamp(17px,1.7vw,20px);margin:0}
+section{padding:clamp(76px,11vw,150px) 0;border-top:1px solid var(--hair)}
+.btn{display:inline-block;padding:16px 34px;border:1px solid var(--gold);background:transparent;color:var(--ink);font:400 14px Jost,sans-serif;letter-spacing:.2em;text-decoration:none;text-transform:uppercase;cursor:pointer;transition:background .4s,color .4s,letter-spacing .4s}
+.btn:hover,.btn:focus-visible{background:var(--gold);color:#0a0806;letter-spacing:.24em;outline:none}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--nav);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--hair)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:12px;font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;text-decoration:none}
+.dm{width:8px;height:8px;background:var(--gold);transform:rotate(45deg)}
+.nl{display:flex;align-items:center;gap:clamp(18px,3vw,40px);font-size:13px;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
+.nl a,.nl button{color:var(--ink);text-decoration:none;background:none;border:0;font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;padding:0;transition:color .3s}
+.nl a:hover,.nl button:hover{color:var(--gold)}
+.nl button{border:1px solid var(--gold);padding:10px 20px}
+.nl button:hover{background:var(--gold);color:#0a0806}
+@media(max-width:640px){.nl a{display:none}}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--gold);transform-origin:left;transform:scaleX(var(--p,0))}
+.glow{position:fixed;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;z-index:15;pointer-events:none;background:radial-gradient(circle,var(--glowc),transparent 62%);will-change:transform}
+@media(hover:none){.glow{display:none}}
+.grain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero{position:relative;overflow:hidden;isolation:isolate;border-top:0;padding:clamp(40px,7vw,96px) 0 clamp(56px,8vw,110px);background:radial-gradient(70% 60% at 72% 100%,var(--pool),transparent 70%)}
+.hero .wrap{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(20px,4vw,70px);align-items:center}
+.spot{position:absolute;z-index:-1;left:35%;right:-10%;top:-25%;bottom:0;pointer-events:none;filter:blur(28px);background:conic-gradient(from 168deg at 60% 0%,transparent 0deg,var(--spot) 11deg,transparent 22deg);animation:fade 2.4s .2s ease-out both}
+.motes{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.motes i{position:absolute;bottom:-10px;border-radius:50%;background:radial-gradient(circle,var(--dust),transparent 70%);opacity:0;animation:rise linear infinite}
+.hero h1{font-size:clamp(50px,8vw,116px);margin-bottom:26px;max-width:10.2em;animation:reveal 1.6s .2s cubic-bezier(.2,.7,.2,1) both}
+.hero .eyebrow,.hero .lede,.hero .cta{animation:reveal 1.6s .35s cubic-bezier(.2,.7,.2,1) both}
+.hero .lede{margin-bottom:36px}
+.cta{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin:0}
+.social{display:flex;gap:12px}
+.social a{width:50px;height:50px;display:grid;place-items:center;border:1px solid var(--hair);border-radius:50%;transition:background .35s,color .35s,border-color .35s}
+.social a:hover,.social a:focus-visible{background:var(--gold);border-color:var(--gold);color:#0a0806;outline:none}
+.social svg{width:20px;height:20px}
+.pf{position:relative;width:min(100%,480px);aspect-ratio:1;margin:0 auto;animation:lit 2.4s .2s ease-out both}
+.ring{position:absolute;inset:0;animation:spin 50s linear infinite}
+.ring svg{width:100%;height:100%}
+.ring text{font:500 18px Jost,sans-serif;fill:var(--gold);text-transform:uppercase}
+.arch{position:absolute;left:19%;right:19%;top:11%;bottom:11%;border:1px solid var(--gold);border-radius:999px 999px 16px 16px;padding:9px;box-shadow:0 30px 80px -20px rgba(0,0,0,.45),0 0 90px -10px var(--pool)}
+.ph{position:relative;width:100%;height:100%;border-radius:999px 999px 9px 9px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(165deg,var(--t1),var(--t2)) center/cover no-repeat}
+.ph{background-size:cover;background-position:50% 20%}.ph::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 45% at 50% 25%,var(--pool),transparent 70%);mix-blend-mode:soft-light}
+.ph span{position:relative;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(74px,12vw,140px);color:var(--gold);opacity:.55}
+.chip{position:absolute;left:-2%;bottom:9%;display:flex;align-items:center;gap:10px;padding:11px 18px;background:var(--nav);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--hair);color:var(--ink);font:400 13px Jost,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.chip:hover{border-color:var(--gold)}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:ping 2s infinite}
+.mq{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);overflow:hidden;padding:22px 0}
+.mt{display:flex;width:max-content;animation:mq 42s linear infinite}
+.mt div{flex:none;display:flex;align-items:center;gap:36px;padding-right:36px}
+.mt span{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(24px,3.2vw,38px);white-space:nowrap}
+.mt i{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:none}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:clamp(14px,2vw,28px);margin-top:48px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(14px,2vw,28px);margin-top:48px}
+.tile{position:relative;display:grid;place-items:center;border:1px solid var(--hair);background:linear-gradient(160deg,var(--t1),var(--t2));overflow:hidden;aspect-ratio:9/14;text-decoration:none;transition:border-color .4s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.tile.w{aspect-ratio:16/9}
+.tile:hover{border-color:var(--gold);transform:translateY(-6px)}
+.tile::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 40%,var(--pool),transparent 70%)}
+.tile::after{content:"";position:absolute;inset:12px;border:1px solid var(--gold);opacity:0;transform:scale(1.03);transition:opacity .4s,transform .5s;clip-path:polygon(0 0,16% 0,16% 1px,1px 1px,1px 16%,0 16%,0 0,0 100%,16% 100%,16% calc(100% - 1px),1px calc(100% - 1px),1px 84%,0 84%,100% 0,84% 0,84% 1px,calc(100% - 1px) 1px,calc(100% - 1px) 16%,100% 16%,100% 100%,84% 100%,84% calc(100% - 1px),calc(100% - 1px) calc(100% - 1px),calc(100% - 1px) 84%,100% 84%)}
+.tile:hover::after{opacity:.9;transform:none}
+.tile b{position:absolute;top:14px;left:20px;font:400 40px "Cormorant Garamond",Georgia,serif;color:var(--gold);opacity:.85}
+.play{position:relative;width:64px;height:64px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center}
+.play::after{content:"";margin-left:4px;border-left:15px solid var(--gold);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.tile span{position:absolute;left:20px;bottom:16px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.story{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,7vw,110px);align-items:start}
+.story .big{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(26px,3vw,38px);line-height:1.2;margin:0 0 26px}
+.story p{margin:0 0 20px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,2vw,28px);margin-top:48px}
+.card{position:relative;border:1px solid var(--hair);padding:32px 32px 0;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,var(--t1),transparent 70%);transition:border-color .4s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.cards.one{grid-template-columns:minmax(0,420px)}
+.logobox{position:relative;display:grid;place-items:center;margin:-32px -32px 10px;padding:34px 20px;background:radial-gradient(60% 70% at 50% 50%,#2a2114,#0b0907);border-bottom:1px solid var(--hair);overflow:hidden}
+.logobox::before{content:"";position:absolute;width:70%;aspect-ratio:1;background:radial-gradient(circle,rgba(255,150,40,.45),transparent 65%);filter:blur(18px);animation:pulse 3.6s ease-in-out infinite}
+.logobox img{position:relative;width:min(62%,230px);height:auto;filter:drop-shadow(0 0 6px rgba(255,170,70,.9)) drop-shadow(0 0 22px rgba(255,120,20,.6));animation:flick 3.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55;transform:scale(1.12)}}
+@keyframes flick{50%{filter:drop-shadow(0 0 3px rgba(255,170,70,.7)) drop-shadow(0 0 14px rgba(255,120,20,.45))}}
+.mark{width:56px;height:56px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font:400 28px "Cormorant Garamond",Georgia,serif;color:var(--gold)}
+.role{margin:8px 0 0;color:var(--gold);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:400}
+.card h3{font-size:38px}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.card a.l{font-size:15px;text-decoration:none;border-bottom:1px solid var(--hair);align-self:flex-start;margin-bottom:14px}
+.code{position:relative;margin:auto -33px 0;padding:22px 32px;border-top:1px dashed var(--hair);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.code::before,.code::after{content:"";position:absolute;top:-13px;width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--hair)}
+.code::before{left:-14px;clip-path:inset(0 0 0 50%)}.code::after{right:-14px;clip-path:inset(0 50% 0 0)}
+.code b{font-weight:500;letter-spacing:.24em;font-size:18px}
+.code button{background:var(--gold);color:#0a0806;border:0;padding:11px 20px;font:500 12px Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 38px}
+.tags span{border:1px solid var(--hair);padding:9px 20px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:52px;border-top:1px solid var(--hair)}
+.steps div{padding:34px 30px 6px 0}
+.steps b{display:block;font:400 64px "Cormorant Garamond",Georgia,serif;color:var(--gold);line-height:1;margin-bottom:14px}
+.steps h3{font-size:32px;margin-bottom:8px}
+.steps p{margin:0;color:var(--muted);font-size:16px;max-width:30ch}
+footer{border-top:1px solid var(--hair);padding:64px 0 28px;overflow:hidden}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+footer h4{margin:0 0 14px;font-weight:400;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+footer a,footer p{display:block;margin:0 0 6px;color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--gold)}
+footer .logo{color:var(--ink);margin-bottom:10px}
+.wm{font:400 clamp(60px,17.5vw,270px)/.85 "Cormorant Garamond",Georgia,serif;text-align:center;color:transparent;-webkit-text-stroke:1px var(--hair);margin-top:56px;letter-spacing:-.02em;white-space:nowrap;user-select:none}
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1.1s,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:860px){.hero .wrap,.story,footer .wrap{grid-template-columns:1fr}.pf{order:-1;width:min(86%,380px)}}
+dialog{width:min(560px,100% - 28px);max-height:calc(100% - 28px);overflow:auto;padding:clamp(26px,5vw,46px);background:var(--bg);color:var(--ink);border:1px solid var(--gold)}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(7px)}
+dialog h2{font-size:46px}
+.x{position:absolute;right:16px;top:12px;background:none;border:0;color:var(--ink);font-size:30px;cursor:pointer;line-height:1}
+label{display:block;margin-top:20px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:400}
+input,select,textarea{width:100%;margin-top:6px;padding:10px 0;background:transparent;border:0;border-bottom:1px solid var(--hair);color:var(--ink);font:300 17px Jost,sans-serif;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+select option{color:#17130e}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.fb{display:none;margin-top:22px;padding:16px;border:1px dashed var(--hair);font-size:15px;color:var(--muted)}
+.fb.on{display:block}
+.fb button{margin-top:10px;background:none;border:1px solid var(--gold);color:var(--ink);padding:8px 16px;font:400 12px Jost,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes lit{from{filter:brightness(.1);opacity:.3}to{filter:none;opacity:1}}
+@keyframes reveal{from{opacity:0;filter:blur(12px);transform:translateY(16px)}to{opacity:1;filter:none;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(217,178,95,0)}0%{box-shadow:0 0 0 0 rgba(217,178,95,.6)}}
+@keyframes rise{0%{opacity:0;transform:translate(0,0)}15%{opacity:.8}100%{opacity:0;transform:translate(var(--dx),-70vh)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.motes,.glow{display:none}}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<div class="glow" id="glow"></div><div class="grain"></div>
+<nav><div class="wrap"><a class="logo" href="#top"><i class="dm"></i>itsmadebymo</a>
+  <div class="nl"><a href="#work">Work</a><a href="#codes">Codes</a><a href="#about">About</a><button data-open>Work with me</button></div></div><div class="prog" id="prog"></div></nav>
+
+<header class="hero" id="top">
+  <div class="spot"></div><div class="motes" id="motes" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Content Creator · UGC Creator · Videographer</p>
+      <h1>Cinematic content that stops the scroll.</h1>
+      <p class="lede">Videography, UGC and Content for brands that want their product to look like a film.</p>
+      <div class="cta"><button class="btn" data-open>Work with me</button>
+        <div class="social">
+          <a href="https://www.instagram.com/itsmadebymo" target="_blank" rel="noopener" aria-label="Instagram @itsmadebymo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.tiktok.com/@itsmadebymo" target="_blank" rel="noopener" aria-label="TikTok @itsmadebymo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.6V9.2a7.4 7.4 0 0 0 4.3 1.4V7.5a4.3 4.3 0 0 1-3.2-1.7z"/></svg></a>
+        </div></div>
+    </div>
+    <div class="pf">
+      <div class="ring" aria-hidden="true"><svg viewBox="0 0 500 500"><defs><path id="c" d="M250 250 m-226 0 a226 226 0 1 1 452 0 a226 226 0 1 1 -452 0"/></defs><text><textPath href="#c" textLength="1410" lengthAdjust="spacing">Videographer • UGC Creator • Cinematic Content • Brand Films • </textPath></text></svg></div>
+      <div class="arch"><div class="ph" id="ph" role="img" aria-label="MO"><span>MO</span></div></div>
+      <button class="chip" data-open><i></i>Open for bookings</button>
+    </div>
+  </div>
+</header>
+
+<div class="mq" aria-hidden="true"><div class="mt" id="mt"><div><span>Cinematic</span><i></i><span>UGC</span><i></i><span>Short-form</span><i></i><span>Brand films</span><i></i><span>Real people, real product</span><i></i></div></div></div>
+
+<section id="work">
+  <div class="wrap rv">
+    <p class="eyebrow">Portfolio</p>
+    <h2>The work.</h2>
+    <p class="lede">Projects shot and edited by me.</p>
+
+    <div class="construction">
+      <div class="tape tape-top">UNDER CONSTRUCTION • UNDER CONSTRUCTION • UNDER CONSTRUCTION •</div>
+
+      <div class="construction-content">
+        <span class="construction-icon">⚒</span>
+        <h3>Something is in the works.</h3>
+        <p>Building the portfolio. Cinematic projects coming soon.</p>
+        <span class="status">PORTFOLIO IN PROGRESS</span>
+      </div>
+
+      <div class="tape tape-bottom">UNDER CONSTRUCTION • UNDER CONSTRUCTION • UNDER CONSTRUCTION •</div>
+    </div>
+  </div>
+</section>
+
+<style>
+.construction {
+  position: relative;
+  min-height: 300px;
+  margin-top: 28px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.construction-content {
+  padding: 70px 24px;
+  color: #f5f5f5;
+}
+
+.construction-icon {
+  font-size: 34px;
+  color: #f5c542;
+}
+
+.construction-content h3 {
+  margin: 16px 0 10px;
+  font-size: clamp(22px, 4vw, 34px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.construction-content p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 7px 12px;
+  border: 1px solid #555;
+  color: #f5c542;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.tape {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  padding: 10px 0;
+  background: repeating-linear-gradient(
+    135deg,
+    #f5c542 0,
+    #f5c542 18px,
+    #111 18px,
+    #111 36px
+  );
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  text-shadow: 1px 1px #000;
+}
+
+.tape-top {
+  top: 20px;
+  transform: rotate(-2deg);
+}
+
+.tape-bottom {
+  bottom: 20px;
+  transform: rotate(2deg);
+}
+</style>
+
+<section id="about"><div class="wrap story rv">
+  <div><p class="eyebrow">About</p><h2>Hey, I’m Mo. Here’s my story.</h2></div>
+  <div style="padding-top:10px">
+    <p class="big">I make content that looks like a film and works like an ad.</p>
+    <p>I’m a content creator doing UGC and videography gigs when a project calls for it. I’m also an ambassador for Controlled Insanity, the brand I’ve been passionate about since the beginning. Whether you need relatable UGC from a real creator or a polished brand film, I take it from the first idea to the final edit.</p>
+  </div>
+</div></section>
+
+<section id="codes"><div class="wrap rv">
+  <p class="eyebrow">Brand deals</p>
+  <h2>My codes.</h2>
+  <p class="lede">I only work with one brand at the moment. Use my code <b style="font-weight:500">MO</b> at checkout to save.</p>
+  <div class="cards one">
+    <article class="card ci">
+      <div class="logobox">
+        <img src="https://controlledinsanity.com/cdn/shop/files/controlled_insanity_favicon_6674897e-e419-4cc1-9f1c-6d4983b9cc13.png?v=1781603848&width=520" alt="Controlled Insanity logo" width="260">
+      </div>
+      <p class="role">Brand ambassador</p>
+      <h3>Controlled Insanity</h3>
+      <p>The brand that started it all for me and the one I’ve been passionate about since the beginning. It sparked my love for content creation.</p>
+      <a class="l" href="https://kontrolledinsanity.com/?aff=91" target="_blank" rel="noopener">kontrolledinsanity.com →</a>
+      <div class="code">
+        <b>MO</b>
+        <button data-code="MO">Copy</button>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<section id="brands"><div class="wrap rv">
+  <p class="eyebrow">For brands</p><h2>Content that earns the click.</h2>
+  <p class="lede">UGC that feels real and videography that looks like a film, built around your product and your audience. Also open to athlete and ambassador partnerships.</p>
+  <div class="tags"><span>UGC videos</span><span>Cinematic brand films</span><span>Short-form edits</span><span>Athlete / ambassador</span></div>
+  <button class="btn" data-open>Work with me</button>
+  <div class="steps">
+    <div><b>01</b><h3>Brief</h3><p>You tell me about the product and what you want to achieve.</p></div>
+    <div><b>02</b><h3>Shoot</h3><p>I plan and film everything, from the hook to the product shots.</p></div>
+    <div><b>03</b><h3>Deliver</h3><p>Edited, graded and ready to post on your channels.</p></div>
+  </div>
+</div></section>
+
+<section id="shot">
+  <div class="wrap rv">
+    <p class="eyebrow">Made for brands</p>
+    <h2>Shot on request.</h2>
+    <p class="lede">Client work, shot and cut by me.</p>
+
+    <div class="construction">
+      <div class="tape tape-top">
+        UNDER CONSTRUCTION • UNDER CONSTRUCTION • UNDER CONSTRUCTION •
+      </div>
+
+      <div class="construction-content">
+        <span class="construction-icon">⚒</span>
+        <h3>Client work incoming.</h3>
+        <p>Creating something worth watching.</p>
+        <span class="status">CLIENT PROJECTS IN PROGRESS</span>
+      </div>
+
+      <div class="tape tape-bottom">
+        UNDER CONSTRUCTION • UNDER CONSTRUCTION • UNDER CONSTRUCTION •
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+<div>
+  <a class="logo" href="#top"><i class="dm"></i>itsmadebymo</a>
+  <p>Content Creator<br>UGC Creator<br>Videographer</p>
+</div>  <div><h4>Site</h4><a href="#work">Work</a><a href="#codes">Codes</a><a href="#about">About</a></div>
+  <div><h4>Elsewhere</h4><a href="https://www.tiktok.com/@itsmadebymo" target="_blank" rel="noopener">TikTok · @itsmadebymo</a><a href="https://www.instagram.com/itsmadebymo" target="_blank" rel="noopener">Instagram · @itsmadebymo</a><a href="mailto:contact@itsmadebymo.com">contact@itsmadebymo.com</a></div>
+</div><div class="wm" aria-hidden="true">itsmadebymo</div></footer>
+
+<dialog id="dlg">
+  <button class="x" id="cx" aria-label="Close">×</button>
+  <p class="eyebrow">For brands</p><h2>Work with me</h2>
+  <p class="lede" style="font-size:17px">Tell me about your brand and what you have in mind, whether that’s content or an athlete / ambassador partnership. I handle every enquiry myself and will follow up personally.</p>
+  <form id="f">
+    <label>Your name *<input name="n" required autocomplete="name"></label>
+    <label>Your email *<input name="e" type="email" required autocomplete="email"></label>
+    <label>Your brand *<input name="b" required></label>
+    <label>What you need *<select name="t" required><option>UGC</option><option>Videography</option><option>Athlete / Ambassador partnership</option><option>Both / not sure yet</option></select></label>
+    <label>Tell me more *<textarea name="m" rows="3" required></textarea></label>
+    <div class="row"><button class="btn" type="submit">Send enquiry</button><button class="btn" type="button" id="cc" style="border-color:var(--hair)">Cancel</button></div>
+  </form>
+  <div class="fb" id="fb"><b>Didn’t your email app open?</b> Copy the message and send it to contact@itsmadebymo.com.<br><button id="cm">Copy message</button></div>
+  <p style="font-size:14px;color:var(--muted);margin:20px 0 0">This opens your own email app with the details filled in, addressed to me. You send it from your account, so my reply lands straight in your inbox.</p>
+</dialog>
+
+<script>
+(function(){
+  var TO='contact@itsmadebymo.com',d=document,dlg=d.getElementById('dlg'),f=d.getElementById('f'),fb=d.getElementById('fb'),msg='';
+  function copy(t,b){
+    function ok(){if(b){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1600)}}
+    function fallback(){var a=d.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';d.body.appendChild(a);a.select();try{d.execCommand('copy')}catch(e){}d.body.removeChild(a);ok()}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback)}else{fallback()}
+  }
+  d.querySelectorAll('[data-open]').forEach(function(b){b.addEventListener('click',function(){dlg.showModal()})});
+  d.getElementById('cx').onclick=d.getElementById('cc').onclick=function(){dlg.close()};
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  d.querySelectorAll('[data-code]').forEach(function(b){b.addEventListener('click',function(){copy(b.getAttribute('data-code'),b)})});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var v=new FormData(f);
+    msg='Hi Mo,\n\nName: '+v.get('n')+'\nEmail: '+v.get('e')+'\nBrand: '+v.get('b')+'\nI’m looking for: '+v.get('t')+'\n\n'+v.get('m');
+    fb.classList.add('on');
+    location.href='mailto:'+TO+'?subject='+encodeURIComponent('Enquiry from '+v.get('b'))+'&body='+encodeURIComponent(msg);
+  });
+  d.getElementById('cm').onclick=function(){copy(msg,this)};
+  (function(){var t=d.getElementById('mt'),unit=t.firstElementChild.cloneNode(true),rt;
+    function build(){
+      t.innerHTML='';t.style.animation='none';
+      var probe=unit.cloneNode(true);t.appendChild(probe);
+      var w=probe.getBoundingClientRect().width||600,n=Math.max(1,Math.ceil(innerWidth/w)),set=d.createElement('div'),i;
+      set.style.cssText='display:flex;flex:none';
+      for(i=0;i<n;i++)set.appendChild(unit.cloneNode(true));
+      t.innerHTML='';t.appendChild(set);t.appendChild(set.cloneNode(true));
+      t.style.animationDuration=Math.max(24,w*n/55)+'s';
+      void t.offsetWidth;t.style.animation='';t.style.animationDuration=Math.max(24,w*n/55)+'s';
+    }
+    build();addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(build,200)});
+    if(d.fonts&&d.fonts.ready)d.fonts.ready.then(build);
+  })();
+  var m=d.getElementById('motes');
+  for(var i=0;i<22;i++){var e=d.createElement('i'),s=1.5+Math.random()*3.5;
+    e.style.cssText='left:'+(Math.random()*100)+'%;width:'+s+'px;height:'+s+'px;--dx:'+((Math.random()-.5)*120)+'px;animation-duration:'+(10+Math.random()*12)+'s;animation-delay:'+(-Math.random()*20)+'s';
+    m.appendChild(e)}
+  var g=d.getElementById('glow'),pr=d.getElementById('prog');
+  addEventListener('pointermove',function(ev){g.style.transform='translate('+ev.clientX+'px,'+ev.clientY+'px)'});
+  function sp(){var h=d.documentElement.scrollHeight-innerHeight;pr.style.setProperty('--p',h>0?Math.min(1,scrollY/h):0)}
+  addEventListener('scroll',sp,{passive:true});sp();
+  var rv=d.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});rv.forEach(function(x){io.observe(x)})}
+  else{rv.forEach(function(x){x.classList.add('in')})}
+})();
+</script>
+</body>
+</html>
